@@ -152,7 +152,7 @@ HouseStyle: Style of dwelling
 OverallQual: Rates the overall material and finish of the house
 
        10	Very Excellent
-       9	Excellent
+       9	asExcellent
        8	Very Good
        7	Good
        6	Above Average

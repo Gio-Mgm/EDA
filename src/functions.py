@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-def get_model_metrics(model, X, y):
+def get_model_metrics(model, X, y, b1=True, b2=True):
     """
         Separate data in train and test sets,
         fit the model,
@@ -24,11 +24,12 @@ def get_model_metrics(model, X, y):
     )
     model.fit(X_train, y_train)
 
-    # Affichage des β1 pour chaque variable
-    for idx, name in enumerate(X_train.columns):
-        print(f"β1 de {name} : {round(model.coef_[idx], 3)}")
-
-    print(f"β0 (intercept_) : {round(model.intercept_, 3)}\n")
+    if b1:
+        # Affichage des β1 pour chaque variable
+        for idx, name in enumerate(X_train.columns):
+            print(f"β1 de {name} : {round(model.coef_[idx], 3)}")
+    if b2:
+        print(f"β0 (intercept_) : {round(model.intercept_, 3)}\n")
 
     y_train_pred = model.predict(X_train)
     y_test_pred = model.predict(X_test)
@@ -78,4 +79,4 @@ def major_values(df, x):
         # Ajout dans la Series du pourcentage d'occurence par rapport à la taille de la colonne pour chaque colonnes
         s.loc[col] = df[col].value_counts()[0]/len(df[col])*100
     # Récupération des x colonnes avec le pourcentage le plus haut
-    print(s.sort_values(ascending=False)[:x])
+    return s.sort_values(ascending=False)[:x]
